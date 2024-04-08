@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+uname -a
+
 set -ex
 
 cd "$(dirname "$0")"
