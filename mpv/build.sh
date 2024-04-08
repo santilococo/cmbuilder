@@ -26,7 +26,7 @@ hdiutil create -volname mpv -srcfolder build/mpv.app -ov -format UDZO mpv.dmg
 
 shasum -a 256 mpv.dmg > mpv.dmg.sha256sum
 
-./build/mpv --version | grep -oP 'mpv\s+v\K[\d.]+' > mpv.dmg.version
+./build/mpv --version | grep -o 'mpv[[:space:]]v[[:digit:].]*' | awk '{print $2}' > mpv.dmg.version
 
 mv mpv.dmg "$baseFolder"
 mv mpv.dmg.sha256sum "$baseFolder"
