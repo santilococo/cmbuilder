@@ -11,7 +11,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        pkgInfo: ['mpv|mpv.dmg']
+        pkgInfo: ['mpv|mpv.tar.gz']
 
     steps:
       - name: Set env variables

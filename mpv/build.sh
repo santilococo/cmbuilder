@@ -26,13 +26,15 @@ dylibbundler --bundle-deps --dest-dir build/mpv.app/Contents/MacOS/lib/ --instal
 
 #shasum -a 256 mpv.dmg > mpv.dmg.sha256sum
 
-version=$(./build/mpv --version | grep -o 'mpv[[:space:]]v[[:digit:].]*' | awk '{print $2}')
+tarball="mpv.tar.gz"
 
-tar -czf "mpv-${version/v/}.tar.gz" build/mpv.app build/mpv.1
+tar -czf "$tarball" build/mpv.app build/mpv.1
+
+version=$(./build/mpv --version | grep -o 'mpv[[:space:]]v[[:digit:].]*' | awk '{print $2}')
 
 echo "$version" > mpv.dmg.version
 
-mv mpv.dmg "$baseFolder"
-mv mpv.dmg.sha256sum "$baseFolder"
-mv mpv.dmg.version "$baseFolder"
+mv "$tarball" "$baseFolder"
+mv "$tarball".sha256sum "$baseFolder"
+mv "$tarball".version "$baseFolder"
 
