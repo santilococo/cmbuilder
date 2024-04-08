@@ -38,7 +38,7 @@ jobs:
         if: ${{ env.cancelJob == 'false' }}
         with:
           name: "${{ env.pkgName }}"
-          path: "${{ env.pkgApp }}"
+          path: "${{ env.pkgName }}/${{ env.pkgApp }}"
        
       - uses: softprops/action-gh-release@v2
         if: ${{ env.cancelJob == 'false' }}
@@ -47,4 +47,4 @@ jobs:
           tag_name: "${{ env.pkgName }}-latest"
           prerelease: false
           files: |
-            "${{ env.pkgApp }}"
+            "${{ env.pkgName }}/${{ env.pkgApp }}"

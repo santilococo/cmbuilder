@@ -21,3 +21,4 @@ meson compile -C build
 ./TOOLS/osxbundle.py --skip-deps build/mpv
 
 mv build/mpv.app "$baseFolder"
+
