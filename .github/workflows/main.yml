@@ -48,3 +48,4 @@ jobs:
           prerelease: false
           files: |
             "${{ env.pkgName }}/${{ env.pkgApp }}"
+            "${{ env.pkgName }}/${{ env.pkgApp }}.sha256sum"
