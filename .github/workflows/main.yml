@@ -33,6 +33,8 @@ jobs:
         if: ${{ env.cancelJob == 'false' }}
         run: |
           bash "${{ env.pkgName }}"/build.sh
+          pkgVer=$(< "${{ env.pkgName }}/${{ env.pkgApp }}.version")
+          echo "pkgVer=$pkgVer" >> $GITHUB_ENV
 
       - uses: actions/upload-artifact@v3
         if: ${{ env.cancelJob == 'false' }}
@@ -44,7 +46,7 @@ jobs:
         if: ${{ env.cancelJob == 'false' }}
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          tag_name: "${{ env.pkgName }}-latest"
+          tag_name: "${{ env.pkgName }}-${{ env.pkgVer }}"
           prerelease: false
           files: |
             ./${{ env.pkgName }}/${{ env.pkgApp }}
