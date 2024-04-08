@@ -39,14 +39,9 @@ jobs:
         with:
           name: "${{ env.pkgName }}"
           path: "${{ env.pkgName }}/${{ env.pkgApp }}"
-
-      - name: Build package (debug)
-        run: |
-          mkdir -p "${{ env.pkgName }}/${{ env.pkgApp }}"
-          touch "${{ env.pkgName }}/${{ env.pkgApp }}"
        
       - uses: softprops/action-gh-release@v2
-        #if: ${{ env.cancelJob == 'false' }}
+        if: ${{ env.cancelJob == 'false' }}
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           tag_name: "${{ env.pkgName }}-latest"
