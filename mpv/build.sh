@@ -2,9 +2,9 @@
 
 set -ex
 
-baseFolder="$(pwd)"
-
 cd "$(dirname "$0")"
+
+baseFolder="$(pwd)"
 
 brew install --build-from-source --only-dependencies mpv
 brew install libplacebo
@@ -20,6 +20,4 @@ meson compile -C build
 
 ./TOOLS/osxbundle.py --skip-deps build/mpv
 
-pkgName="$(find "$(pwd)" -type d -name "*.app")"
-
-echo "$pkgName" | sed "s|^$baseFolder/||"
+mv build/mpv.app "$baseFolder"

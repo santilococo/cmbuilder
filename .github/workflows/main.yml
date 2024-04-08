@@ -11,13 +11,15 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        pkgInfo: ['mpv']
+        pkgInfo: ['mpv|mpv.app']
 
     steps:
       - name: Set env variables
         run: |
           pkgName=$(echo "${{ matrix.pkgInfo }}" | cut -d$'|' -f1)
           echo "pkgName=$pkgName" >> $GITHUB_ENV
+          pkgApp=$(echo "${{ matrix.pkgInfo }}" | cut -d$'|' -f2)
+          echo "pkgApp=$pkgApp" >> $GITHUB_ENV
 
       - uses: actions/checkout@v4
         with:
@@ -30,8 +32,7 @@ jobs:
       - name: Build package
         if: ${{ env.cancelJob == 'false' }}
         run: |
-          pkgApp="$(bash "${{ env.pkgName }}"/build.sh)"
-          echo "pkgApp=$pkgApp" >> $GITHUB_ENV
+          bash "${{ env.pkgName }}"/build.sh
 
       - uses: actions/upload-artifact@v3
         if: ${{ env.cancelJob == 'false' }}
