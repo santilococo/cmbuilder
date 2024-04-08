@@ -26,7 +26,7 @@ dylibbundler --bundle-deps --dest-dir build/mpv.app/Contents/MacOS/lib/ --instal
 
 tarball="mpv.tar.gz"
 
-tar -czf "$tarball" build/mpv.app build/mpv.1
+tar -czf "$tarball" --strip-components=1 build/mpv.app build/mpv.1
 
 shasum -a 256 "$tarball" > "$tarball".sha256sum
 
