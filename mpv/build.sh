@@ -2,6 +2,7 @@
 
 uname -a
 
+
 set -ex
 
 cd "$(dirname "$0")"
