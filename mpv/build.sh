@@ -28,7 +28,7 @@ find build/mpv.app
 
 hdiutil create -volname mpv -srcfolder build/mpv.app -ov -format UDZO mpv.dmg
 
-sha256sum mpv.dmg > mpv.dmg.sha256sum
+shasum -a 256 mpv.dmg > mpv.dmg.sha256sum
 
 mv mpv.dmg "$baseFolder"
 mv mpv.dmg.sha256sum "$baseFolder"
