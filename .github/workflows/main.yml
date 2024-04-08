@@ -41,9 +41,10 @@ jobs:
           path: "${{ env.pkgName }}/${{ env.pkgApp }}"
        
       - uses: marvinpinto/action-automatic-releases@latest
+        #if: ${{ env.cancelJob == 'false' }}
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
-          #automatic_release_tag: "${{ env.pkgName }}"-latest
+          automatic_release_tag: "${{ env.pkgName }}"-latest
           prerelease: false
           files: |
             "${{ env.pkgName }}/${{ env.pkgApp }}"
