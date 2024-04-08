@@ -22,11 +22,15 @@ meson compile -C build
 
 dylibbundler --bundle-deps --dest-dir build/mpv.app/Contents/MacOS/lib/ --install-path @executable_path/lib/ --fix-file build/mpv.app/Contents/MacOS/mpv
 
-hdiutil create -volname mpv -srcfolder build/mpv.app -ov -format UDZO mpv.dmg
+#hdiutil create -volname mpv -srcfolder build/mpv.app -ov -format UDZO mpv.dmg
 
-shasum -a 256 mpv.dmg > mpv.dmg.sha256sum
+#shasum -a 256 mpv.dmg > mpv.dmg.sha256sum
 
-./build/mpv --version | grep -o 'mpv[[:space:]]v[[:digit:].]*' | awk '{print $2}' > mpv.dmg.version
+version=$(./build/mpv --version | grep -o 'mpv[[:space:]]v[[:digit:].]*' | awk '{print $2}')
+
+tar -czf "mpv-${version/v/}.tar.gz" build/mpv.app build/DOCS/man/mpv.1
+
+echo "$version" > mpv.dmg.version
 
 mv mpv.dmg "$baseFolder"
 mv mpv.dmg.sha256sum "$baseFolder"
