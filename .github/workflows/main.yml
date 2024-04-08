@@ -1,0 +1,42 @@
+name: CI
+
+on: [push, pull_request, workflow_dispatch]
+
+jobs:
+  allPackages:
+    runs-on: macos-latest
+    env:
+      cancelJob: false
+      srcModified: false
+    strategy:
+      fail-fast: false
+      matrix:
+        pkgInfo: ['mpv|mpv.app']
+
+    steps:
+      - name: Set env variables
+        run: |
+          pkgName=$(echo "${{ matrix.pkgInfo }}" | cut -d$'|' -f1)
+          echo "pkgName=$pkgName" >> $GITHUB_ENV
+          pkgApp=$(echo "${{ matrix.pkgInfo }}" | cut -d$'|' -f2)
+          echo "pkgApp=$pkgApp" >> $GITHUB_ENV
+
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 2
+      
+      - name: Check modified files
+        run: |
+          git diff --name-only HEAD HEAD^ | grep -q "${{ env.pkgName }}" || echo "cancelJob=true" >> $GITHUB_ENV
+      
+      - name: Build package
+        if: ${{ env.cancelJob == 'false' }}
+        run: |
+          bash "${{ env.pkgName }}"/build.sh
+
+      - uses: actions/upload-artifact@v3
+        if: ${{ env.cancelJob == 'false' }}
+        with:
+          name: "${{ env.pkgName }}"
+          path: "${{ env.pkgName }}/${{ env.pkgApp }}"
+       
