@@ -6,8 +6,8 @@ cd "$(dirname "$0")"
 
 baseFolder="$(pwd)"
 
-brew install --build-from-source --only-dependencies mpv
-brew install libplacebo dylibbundler
+arch -arm64 brew install --build-from-source --only-dependencies mpv
+arch -arm64 brew install libplacebo dylibbundler
 
 git clone "https://github.com/mpv-player/mpv"
 
