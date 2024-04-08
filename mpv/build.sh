@@ -2,6 +2,8 @@
 
 set -ex
 
+cd "$(dirname "$0")"
+
 brew install --build-from-source --only-dependencies mpv
 brew install libplacebo
 
