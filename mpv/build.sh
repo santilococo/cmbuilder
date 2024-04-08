@@ -28,6 +28,10 @@ dylibbundler --bundle-deps --dest-dir build/mpv.app/Contents/MacOS/lib/ --instal
 
 version=$(./build/mpv --version | grep -o 'mpv[[:space:]]v[[:digit:].]*' | awk '{print $2}')
 
+find build/
+
+ls -al build/
+
 tar -czf "mpv-${version/v/}.tar.gz" build/mpv.app build/DOCS/man/mpv.1
 
 echo "$version" > mpv.dmg.version
