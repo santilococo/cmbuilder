@@ -18,7 +18,11 @@ meson compile -C build
 
 ./build/mpv --version
 
-./TOOLS/osxbundle.py --skip-deps build/mpv
+./TOOLS/osxbundle.py build/mpv
 
-mv build/mpv.app "$baseFolder"
+find build/mpv.app
+
+hdiutil create -volname mpv -srcfolder build/mpv.app -ov -format UDZO mpv.dmg
+
+mv mpv.dmg "$baseFolder"
 
