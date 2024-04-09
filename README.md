@@ -30,7 +30,7 @@ Replace `[app-name]` with the name of the application you wish to install.
 
 ## Troubleshooting <a name="troubleshooting"></a>
 
-If you encounter an error message  that the app "can't be opened because Apple cannot check it for malicious software," it is due to macOS Gatekeeper's security system. This message appears because Gatekeeper verifies that apps are signed with a valid developer certificate. You can resolve this issue by removing the quarantine extended attribute on the application. 
+If you encounter an error message stating that the app "can't be opened because Apple cannot check it for malicious software," it is due to macOS Gatekeeper's security system, which verifies that apps are signed with a valid developer certificate. You can resolve this issue by removing the quarantine extended attribute on the application.
 
 Follow these steps:
 
