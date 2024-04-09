@@ -24,7 +24,7 @@ appDir="build/mpv.app"
 
 dylibbundler --bundle-deps --dest-dir "$appDir"/Contents/MacOS/lib/ --install-path @executable_path/lib/ --fix-file "$appDir"/Contents/MacOS/mpv
 
-sed -i -e "s/-UNKNOWN//" -e "s/\(public\.app-category\)\.games/\1\.video/" "$appDir"/Contents/Info.plist
+sed -i '' -e "s/-UNKNOWN//" -e "s/\(public\.app-category\)\.games/\1\.video/" "$appDir"/Contents/Info.plist
 
 tarball="mpv.tar.gz"
 
