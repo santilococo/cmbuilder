@@ -26,6 +26,8 @@ dylibbundler --bundle-deps --dest-dir "$appDir"/Contents/MacOS/lib/ --install-pa
 
 sed -i '' -e "s/-UNKNOWN//" -e "s/\(public\.app-category\)\.games/\1\.video/" "$appDir"/Contents/Info.plist
 
+codesign -s - -f "$appDir"
+
 tarball="mpv.tar.gz"
 
 tar -czf "$tarball" --strip-components=1 "$appDir" build/mpv.1
