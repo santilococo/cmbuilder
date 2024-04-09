@@ -20,13 +20,15 @@ meson compile -C build
 
 ./TOOLS/osxbundle.py --skip-deps build/mpv
 
-dylibbundler --bundle-deps --dest-dir build/mpv.app/Contents/MacOS/lib/ --install-path @executable_path/lib/ --fix-file build/mpv.app/Contents/MacOS/mpv
+appDir="build/mpv.app"
 
-#hdiutil create -volname mpv -srcfolder build/mpv.app -ov -format UDZO mpv.dmg
+dylibbundler --bundle-deps --dest-dir "$appDir"/Contents/MacOS/lib/ --install-path @executable_path/lib/ --fix-file "$appDir"/Contents/MacOS/mpv
+
+sed -i -e "s/-UNKNOWN//" -e "s/\(public\.app-category\)\.games/\1\.video/" "$appDir"/Contents/Info.plist
 
 tarball="mpv.tar.gz"
 
-tar -czf "$tarball" --strip-components=1 build/mpv.app build/mpv.1
+tar -czf "$tarball" --strip-components=1 "$appDir" build/mpv.1
 
 shasum -a 256 "$tarball" > "$tarball".sha256sum
 
